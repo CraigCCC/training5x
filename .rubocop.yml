@@ -1,1 +1,21 @@
 inherit_from: .rubocop_todo.yml
+
+Style/StringLiterals:
+  Exclude:
+    - 'spec/*_helper.rb'
+    - 'app/controllers/tasks_controller.rb'
+    - 'bin/bundle'
+    - 'bin/webpack'
+    - 'bin/webpack-dev-server'
+    - 'bin/yarn'
+    - 'config/environments/production.rb'
+    - 'config/puma.rb'
+    - 'config/routes.rb'
+    - 'config/spring.rb'
+    - 'db/schema.rb'
+    - 'test/application_system_test_case.rb'
+    - 'test/channels/application_cable/connection_test.rb'
+Style/BlockComments:
+  Exclude:
+    - 'spec/*_helper.rb'
+    
