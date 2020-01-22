@@ -1,0 +1,52 @@
+<%= form_with model: @task, local: true do |f| %>
+  <div>
+    <%= f.label :title, "標題" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <%# TODO: 標籤 %>
+  <%#= f.label :tag_name, "標籤" %>
+  <%#= f.text_field :tag_name %>
+  <%# TODO: 標籤 %>
+
+  <%# TODO: Datepicker %>
+  <div>
+    <%= f.label :start_at, "開始時間" %>
+    <%= f.text_field :start_at %>
+  </div>
+
+  <div>
+    <%= f.label :end_at, "結束時間" %>
+    <%= f.text_field :end_at %>
+  </div>
+<%# TODO: Datepicker %>
+
+  <div>
+    <%= f.label :priority, "優先順序" %>
+    <%= f.radio_button :priority, "high", checked: true %>
+    <%= f.label :priority, "高" %>
+    <%= f.radio_button :priority, "normal" %>
+    <%= f.label :priority, "中" %>
+    <%= f.radio_button :priority, "low" %>
+    <%= f.label :priority, "低" %>
+  </div>
+
+  <div>
+    <%= f.select(:status,
+                 options_for_select([
+                   ["待處理", "pending"],
+                   ["進行中", "processing"],
+                   ["已完成", "done"]
+                 ])) %>
+  </div>
+
+  <div>
+    <%= f.label :content, "內容" %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+    <%= link_to "取消", tasks_path %>
+  </div>
+<% end %>
