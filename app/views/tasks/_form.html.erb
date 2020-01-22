@@ -4,9 +4,12 @@
     <%= f.text_field :title %>
   </div>
 
+  <%# TODO: 標籤 %>
   <%#= f.label :tag_name, "標籤" %>
   <%#= f.text_field :tag_name %>
+  <%# TODO: 標籤 %>
 
+  <%# TODO: Datepicker %>
   <div>
     <%= f.label :start_at, "開始時間" %>
     <%= f.text_field :start_at %>
@@ -16,6 +19,7 @@
     <%= f.label :end_at, "結束時間" %>
     <%= f.text_field :end_at %>
   </div>
+<%# TODO: Datepicker %>
 
   <div>
     <%= f.label :priority, "優先順序" %>
@@ -29,11 +33,11 @@
 
   <div>
     <%= f.select(:status,
-                 options_for_select([["待處理", "pending"],
-                                    ["進行中", "processing"],
-                                    ["已完成", "done"]]),
-                 {},
-                 { class: ""}) %>
+                 options_for_select([
+                   ["待處理", "pending"],
+                   ["進行中", "processing"],
+                   ["已完成", "done"]
+                 ])) %>
   </div>
 
   <div>

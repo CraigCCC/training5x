@@ -13,7 +13,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(params_task)
+    @task = Task.new(task_params)
     if @task.save
       redirect_to tasks_path, notice: "新增成功"
     else
@@ -25,7 +25,7 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(params_task)
+    if @task.update(task_params)
       redirect_to tasks_path, notice: "編輯成功"
     else
       render :edit
@@ -42,7 +42,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
   end
 
-  def params_task
+  def task_params
     params.require(:task).permit(:title,
                                  :content,
                                  :status,
