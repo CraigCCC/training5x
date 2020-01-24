@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0.0.beta4'
   gem 'factory_bot_rails', '~> 5.1', '>= 5.1.1'
   gem 'faker', '~> 2.10', '>= 2.10.1'
+  gem 'travis', '~> 1.8.11.travis.1081.9'
 end
 
 group :development do
