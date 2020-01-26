@@ -1,5 +1,8 @@
 inherit_from: .rubocop_todo.yml
 
+Metrics/AbcSize:
+  Max: 24
+
 Metrics/BlockLength:
   Exclude:
     - 'Rakefile'
@@ -10,11 +13,8 @@ Style/StringLiterals:
   Exclude:
     - 'spec/*_helper.rb'
     - 'app/controllers/tasks_controller.rb'
-    - 'bin/bundle'
-    - 'bin/webpack'
-    - 'bin/webpack-dev-server'
-    - 'bin/yarn'
-    - 'config/environments/production.rb'
+    - 'bin/*'
+    - 'config/**/*.rb'
     - 'config/puma.rb'
     - 'config/routes.rb'
     - 'config/spring.rb'
