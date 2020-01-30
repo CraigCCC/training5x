@@ -11,17 +11,22 @@ RSpec.feature 'Tasks', type: :feature do
     scenario 'When create task' do
       click_link '新增任務'
       within('form') do
-        fill_in_task_form
+        fill_in 'task_title', with: 'Coding'
+        fill_in 'task_content', with: 'This is RSpec test'
+        fill_in 'task_start_at', with: 'Sat, 25 Jan 2020 23:14:50 +0800'
+        fill_in 'task_end_at', with: 'Thu, 30 Jan 2020 23:15:17 +0800 '
+        select '待處理', from: 'task_status'
+        choose 'task_priority_high'
       end
       click_button 'Create Task'
-      expect_task_form(task_last)
+      expect_task_info_equal(task_last)
       expect(page).to have_content('新增成功')
       expect(Task.count).to eq 1
     end
 
     scenario 'When read the task' do
       click_link '查看'
-      expect_task_form(task_last)
+      expect_task_info_equal(task_last)
     end
 
     scenario 'When edit task' do
@@ -45,16 +50,7 @@ RSpec.feature 'Tasks', type: :feature do
     end
   end
 
-  def fill_in_task_form
-    fill_in 'task_title', with: 'Coding'
-    fill_in 'task_content', with: 'This is RSpec test'
-    fill_in 'task_start_at', with: 'Sat, 25 Jan 2020 23:14:50 +0800'
-    fill_in 'task_end_at', with: 'Thu, 30 Jan 2020 23:15:17 +0800 '
-    select '待處理', from: 'task_status'
-    choose 'task_priority_high'
-  end
-
-  def expect_task_form(task)
+  def expect_task_info_equal(task)
     expect(task.title).to eq 'Coding'
     expect(task.content).to eq 'This is RSpec test'
     expect(task.start_at).to eq 'Sat, 25 Jan 2020 23:14:50 +0800'
