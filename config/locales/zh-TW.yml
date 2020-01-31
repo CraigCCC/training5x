@@ -210,3 +210,42 @@ zh-TW:
       long: "%Y年%m月%d日 %H:%M"
       short: "%m月%d日 %H:%M"
     pm: 下午
+  locale:
+    zhTW: "中文版(繁體)"
+    en: "英文版"
+  tasks:
+    titles:
+      task_title: "任務標題"
+      create_title: "新增任務"
+      edit_title: "編輯任務"
+      index_title: "任務列表"
+    start_at: "開始時間"
+    end_at: "結束時間"
+    priority: 
+      title: "優先順序"
+      high: "高"
+      normal: "中"
+      low: "低"
+    status:
+      title: "狀態"
+      pending: "待處理"
+      processing: "進行中"
+      done: "已完成"
+    content: "內容"
+    links:
+      add_task: "新增任務"
+      edit_task: "編輯任務"
+      root_page: "回首頁"
+      submit: "送出"
+      cancel: "取消"
+      edit: "編輯"
+      show: "查看"
+      delete: "刪除"
+    confirms:
+      delete: "確定刪除？"
+    notices:
+      add_success: "新增成功"
+      edit_success: "編輯成功"
+      delete_success: "刪除成功"
+    tags:
+      title: "標籤"

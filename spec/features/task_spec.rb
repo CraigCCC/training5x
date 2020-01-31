@@ -18,7 +18,7 @@ RSpec.feature 'Tasks', type: :feature do
         select '待處理', from: 'task_status'
         choose 'task_priority_high'
       end
-      click_button 'Create Task'
+      click_button '送出'
       expect_task_info_equal(task_last)
       expect(page).to have_content('新增成功')
       expect(Task.count).to eq 1
@@ -34,7 +34,7 @@ RSpec.feature 'Tasks', type: :feature do
       within('form') do
         select '進行中', from: 'task_status'
       end
-      click_button 'Update Task'
+      click_button '送出'
       expect(page).to have_content('編輯成功')
       expect(task_last.status).to eq 'processing'
       expect(Task.count).to eq 1

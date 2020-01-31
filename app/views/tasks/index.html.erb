@@ -1,15 +1,15 @@
-<h1>index</h1>
+<h1><%= t("tasks.titles.index_title") %></h1>
 
-<%= link_to "新增任務", new_task_path%>
+<%= link_to t("tasks.links.add_task"), new_task_path%>
 
 <table>
   <thead>
     <tr>
-      <th scope="col">標題</th>
-      <th scope="col">狀態</th>
-      <th scope="col">優先順序</th>
-      <th scope="col">開始時間</th>
-      <th scope="col">結束時間</th>
+      <th scope="col"><%= t("tasks.titles.task_title") %></th>
+      <th scope="col"><%= t("tasks.status.title") %></th>
+      <th scope="col"><%= t("tasks.priority.title") %></th>
+      <th scope="col"><%= t("tasks.start_at") %></th>
+      <th scope="col"><%= t("tasks.end_at") %></th>
       <th scope="col"></th>
     </tr>
   </thead>
@@ -17,14 +17,14 @@
     <tbody>
       <tr>
         <td  scope="col"><%= task.title %></td>
-        <td><%= task.status %></td>
-        <td><%= task.priority %></td>
+        <td><%= t("tasks.status.#{task.status}") %></td>
+        <td><%= t("tasks.priority.#{task.priority}") %></td>
         <td><%= task.start_at %></td>
         <td><%= task.end_at %></td>
         <td>
-          <%= link_to "查看", task_path(task) %>
-          <%= link_to "編輯", edit_task_path(task) %>
-          <%= link_to "刪除", task_path(task), method: :delete, data: { confirm: "確定刪除？" } %>
+          <%= link_to t("tasks.links.show"), task_path(task) %>
+          <%= link_to t("tasks.links.edit"), edit_task_path(task) %>
+          <%= link_to t("tasks.links.delete"), task_path(task), method: :delete, data: { confirm: I18n.t("tasks.confirms.delete") } %>
         </td>
       </tr>
     </tbody>

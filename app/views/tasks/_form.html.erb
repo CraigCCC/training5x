@@ -1,6 +1,6 @@
 <%= form_with model: @task, local: true do |f| %>
   <div>
-    <%= f.label :title, "標題" %>
+    <%= f.label :title, t("tasks.titles.task_title") %>
     <%= f.text_field :title %>
   </div>
 
@@ -11,42 +11,42 @@
 
   <%# TODO: Datepicker %>
   <div>
-    <%= f.label :start_at, "開始時間" %>
+    <%= f.label :start_at, t("tasks.start_at") %>
     <%= f.text_field :start_at %>
   </div>
 
   <div>
-    <%= f.label :end_at, "結束時間" %>
+    <%= f.label :end_at, t("tasks.end_at") %>
     <%= f.text_field :end_at %>
   </div>
 <%# TODO: Datepicker %>
 
   <div>
-    <%= f.label :priority, "優先順序" %>
+    <%= f.label :priority, t("tasks.priority.title") %>
     <%= f.radio_button :priority, "high", checked: true %>
-    <%= f.label :priority, "高" %>
+    <%= f.label :priority, t("tasks.priority.high") %>
     <%= f.radio_button :priority, "normal" %>
-    <%= f.label :priority, "中" %>
+    <%= f.label :priority, t("tasks.priority.normal") %>
     <%= f.radio_button :priority, "low" %>
-    <%= f.label :priority, "低" %>
+    <%= f.label :priority, t("tasks.priority.low") %>
   </div>
 
   <div>
     <%= f.select(:status,
                  options_for_select([
-                   ["待處理", "pending"],
-                   ["進行中", "processing"],
-                   ["已完成", "done"]
+                   [t("tasks.status.pending"), "pending"],
+                   [t("tasks.status.processing"), "processing"],
+                   [t("tasks.status.done"), "done"]
                  ])) %>
   </div>
 
   <div>
-    <%= f.label :content, "內容" %>
+    <%= f.label :content, t("tasks.content") %>
     <%= f.text_area :content %>
   </div>
 
   <div>
-    <%= f.submit %>
-    <%= link_to "取消", tasks_path %>
+    <%= f.submit t("tasks.links.submit")%>
+    <%= link_to t("tasks.links.cancel"), tasks_path %>
   </div>
 <% end %>

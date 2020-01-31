@@ -212,3 +212,42 @@ en:
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
     pm: pm
+  locale:
+    zhTW: "Chinese(Traditional)"
+    en: "English"
+  tasks:
+    titles:
+      task_title: "Task Title"
+      create_title: "Add Task"
+      edit_title: "Edit Task"
+      index_title: "Task List"
+    start_at: "Start Time"
+    end_at: "End Time"
+    priority: 
+      title: "Priority"
+      high: "Urgent"
+      normal: "Normal"
+      low: "Low"
+    status:
+      title: "Status"
+      pending: "Pending"
+      processing: "Processing"
+      done: "Done"
+    content: "Content"
+    links:
+      add_task: "Add Task"
+      edit_task: "Edit Task"
+      root_page: "Home"
+      submit: "Submit"
+      cancel: "Cancel"
+      edit: "Edit"
+      show: "Show"
+      delete: "Delete"
+    confirms:
+      delete: "Comfirm to Delete?"
+    notices:
+      add_success: "Add Successfully"
+      edit_success: "Edit Successfully"
+      delete_success: "Delete Successfully"
+    tags:
+      title: "Tag"
