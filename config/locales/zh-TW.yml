@@ -1,0 +1,40 @@
+zh-TW:
+  locale:
+    zhTW: "中文版(繁體)"
+    en: "英文版"
+  tasks:
+    page_title:
+      task: "任務標題"
+      create: "新增任務"
+      edit: "編輯任務"
+      list: "任務列表"
+    start_at: "開始時間"
+    end_at: "結束時間"
+    priority: 
+      title: "優先順序"
+      high: "高"
+      normal: "中"
+      low: "低"
+    status:
+      title: "狀態"
+      pending: "待處理"
+      processing: "進行中"
+      done: "已完成"
+    content: "內容"
+    links:
+      add_task: "新增任務"
+      edit_task: "編輯任務"
+      root_page: "回首頁"
+      submit: "送出"
+      cancel: "取消"
+      edit: "編輯"
+      show: "查看"
+      delete: "刪除"
+    confirms:
+      delete: "確定刪除？"
+    notices:
+      add_success: "新增成功"
+      edit_success: "編輯成功"
+      delete_success: "刪除成功"
+    tags:
+      title: "標籤"
