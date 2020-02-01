@@ -50,6 +50,24 @@ RSpec.feature 'Tasks', type: :feature do
     end
   end
 
+  describe 'Sort task flow' do
+    let(:task_first) { create(:task, created_at: '2020-01-31 11:00') }
+    let(:task_second) { create(:task, created_at: '2020-02-01 11:00') }
+    before do
+      task_first
+      task_second
+      visit root_path
+    end
+    scenario 'Default sort by created_at', js: true do
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content(task_second.title)
+      end
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content(task_first.title)
+      end
+    end
+  end
+
   def expect_task_info_equal(task)
     expect(task.title).to eq 'Coding'
     expect(task.content).to eq 'This is RSpec test'

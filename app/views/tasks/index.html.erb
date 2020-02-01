@@ -13,8 +13,8 @@
       <th scope="col"></th>
     </tr>
   </thead>
-  <% @tasks.each do |task| %>
-    <tbody>
+  <tbody>
+    <% @tasks.each do |task| %>
       <tr>
         <td  scope="col"><%= task.title %></td>
         <td><%= t("tasks.status.#{task.status}") %></td>
@@ -27,6 +27,6 @@
           <%= link_to t("tasks.links.delete"), task_path(task), method: :delete, data: { confirm: I18n.t("tasks.confirms.delete") } %>
         </td>
       </tr>
-    </tbody>
-  <% end %>
+      <% end %>
+  </tbody>
 </table>
