@@ -1,4 +1,30 @@
 en:
+  activerecord:
+    attributes:
+      task:
+        title: "Task Title"
+        start_at: "Start Time"
+        end_at: "End Time"
+        priority: "Priority"
+        priority: 
+          high: "Urgent"
+          normal: "Normal"
+          low: "Low"
+        status: "Status"
+        status:
+          pending: "Pending"
+          processing: "Processing"
+          done: "Done"
+        content: "Content"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "can't be blank"
+      too_long:
+        other: "is too long (maximum is %{count} characters)"
+      invaild_date: "Should't faster than Start Time"
+
   locale:
     zhTW: "Chinese(Traditional)"
     en: "English"
