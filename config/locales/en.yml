@@ -7,14 +7,14 @@ en:
         end_at: "End Time"
         priority: "Priority"
         priority: 
-          high: "Urgent"
-          normal: "Normal"
-          low: "Low"
+          one: "Urgent"
+          two: "Normal"
+          other: "Low"
         status: "Status"
         status:
-          pending: "Pending"
-          processing: "Processing"
-          done: "Done"
+          one: "Pending"
+          two: "Processing"
+          other: "Done"
         content: "Content"
 
   errors:

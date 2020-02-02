@@ -7,14 +7,14 @@ zh-TW:
         end_at: "結束日期"
         priority: "優先順序"
         priority: 
-          high: "高"
-          normal: "中"
-          low: "低"
+          one: "高"
+          two: "中"
+          other: "低"
         status: "任務狀態"
         status:
-          pending: "待處理"
-          processing: "進行中"
-          done: "已完成"
+          one: "待處理"
+          two: "進行中"
+          other: "已完成"
         content: "任務內容"
 
   errors:

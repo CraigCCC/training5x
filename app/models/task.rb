@@ -2,7 +2,7 @@ class Task < ApplicationRecord
   # validation
   validates :title, :status, :priority, :start_at, :end_at, presence: true
   validates :title, length: { maximum: 50 }
-  validates :end_at_after_start_at?
+  validate :end_at_after_start_at?
 
   enum priority: [:high, :normal, :low]
   enum status: [:pending, :processing, :done]
