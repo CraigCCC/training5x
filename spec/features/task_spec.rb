@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Tasks', type: :feature do
-  let(:task_new) { create(:task) }
-  let(:task_last) { Task.last }
+  let(:new_task) { create(:task) }
+  let(:last_task) { Task.last }
   before :each do
     visit root_path
   end
@@ -19,14 +19,14 @@ RSpec.feature 'Tasks', type: :feature do
         choose 'task_priority_high'
       end
       click_button '送出'
-      expect_task_info_equal(task_last)
+      expect_task_info_equal(last_task)
       expect(page).to have_content('新增成功')
       expect(Task.count).to eq 1
     end
 
     scenario 'When read the task' do
       click_link '查看'
-      expect_task_info_equal(task_last)
+      expect_task_info_equal(last_task)
     end
 
     scenario 'When edit task' do
@@ -36,7 +36,7 @@ RSpec.feature 'Tasks', type: :feature do
       end
       click_button '送出'
       expect(page).to have_content('編輯成功')
-      expect(task_last.status).to eq 'processing'
+      expect(last_task.status).to eq 'processing'
       expect(Task.count).to eq 1
     end
 
@@ -45,25 +45,25 @@ RSpec.feature 'Tasks', type: :feature do
       expect(page.driver.browser.switch_to.alert.text).to eq '確定刪除？'
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content('刪除成功')
-      expect(task_last).to be nil
+      expect(last_task).to be nil
       expect(Task.count).to eq 0
     end
   end
 
   describe 'Sort task flow' do
-    let(:task_first) { create(:task, created_at: '2020-01-31 11:00') }
-    let(:task_second) { create(:task, created_at: '2020-02-01 11:00') }
+    let(:first_task) { create(:task, created_at: '2020-01-31 11:00') }
+    let(:second_task) { create(:task, created_at: '2020-02-01 11:00') }
     before do
-      task_first
-      task_second
+      first_task
+      second_task
       visit root_path
     end
     scenario 'Default sort by created_at', js: true do
       within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content(task_second.title)
+        expect(page).to have_content(second_task.title)
       end
       within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content(task_first.title)
+        expect(page).to have_content(first_task.title)
       end
     end
   end
