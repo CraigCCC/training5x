@@ -1,7 +1,34 @@
 zh-TW:
+  activerecord:
+    attributes:
+      task:
+        title: "任務標題"
+        start_at: "開始日期"
+        end_at: "結束日期"
+        priority: "優先順序"
+        priority: 
+          one: "高"
+          two: "中"
+          other: "低"
+        status: "任務狀態"
+        status:
+          one: "待處理"
+          two: "進行中"
+          other: "已完成"
+        content: "任務內容"
+
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      blank: "不可為空白"
+      too_long:
+        other: "不可超過 %{count} 個字"
+      invaild_date: "不可早於開始日期"
+
   locale:
     zhTW: "中文版(繁體)"
     en: "英文版"
+
   tasks:
     page_title:
       task: "任務標題"
@@ -20,7 +47,7 @@ zh-TW:
       pending: "待處理"
       processing: "進行中"
       done: "已完成"
-    content: "內容"
+    content: "任務內容"
     links:
       add_task: "新增任務"
       edit_task: "編輯任務"
