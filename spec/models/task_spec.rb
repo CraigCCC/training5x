@@ -17,10 +17,10 @@ RSpec.describe Task, type: :model do
       should validate_length_of(:title).is_at_most(50)
     end
 
-    it 'When end_at greater than start_at' do
+    it 'When start_at greater than end_at' do
       new_task.end_at -= 6.days
       new_task.valid?
-      expect(new_task.errors.messages[:end_at]).to include('不可晚於開始日期')
+      expect(new_task.errors.messages[:end_at]).to include('不可早於開始日期')
     end
 
     it 'When column is nil' do

@@ -23,7 +23,7 @@ zh-TW:
       blank: "不可為空白"
       too_long:
         other: "不可超過 %{count} 個字"
-      invaild_date: "不可晚於開始日期"
+      invaild_date: "不可早於開始日期"
 
   locale:
     zhTW: "中文版(繁體)"
