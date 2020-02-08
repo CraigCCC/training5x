@@ -50,20 +50,37 @@ RSpec.feature 'Tasks', type: :feature do
     end
   end
 
-  describe 'Sort task flow' do
+  describe 'Sort task flow', js: true do
     let(:first_task) { create(:task, created_at: '2020-01-31 11:00') }
-    let(:second_task) { create(:task, created_at: '2020-02-01 11:00') }
-    before do
+    let(:second_task) { create(:task, created_at: '2020-02-01 11:00', end_at: first_task.end_at + 1.days) }
+
+    scenario 'Default sort by created_at' do
       first_task
       second_task
       visit root_path
-    end
-    scenario 'Default sort by created_at', js: true do
       within 'tbody tr:nth-child(1)' do
         expect(page).to have_content(second_task.title)
       end
       within 'tbody tr:nth-child(2)' do
         expect(page).to have_content(first_task.title)
+      end
+    end
+
+    scenario 'When sort by end_at' do
+      visit root_path
+      click_link '結束時間'
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content(Task.second.title)
+      end
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content(Task.first.title)
+      end
+      click_link '結束時間'
+      within 'tbody tr:nth-child(1)' do
+        expect(page).to have_content(Task.first.title)
+      end
+      within 'tbody tr:nth-child(2)' do
+        expect(page).to have_content(Task.second.title)
       end
     end
   end
