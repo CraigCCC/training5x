@@ -2,6 +2,8 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
+    return @tasks = Task.sort_by_column(params[:order_by], params[:direction]) if params['order_by']
+
     @tasks = Task.sort_by_created_at
   end
 
