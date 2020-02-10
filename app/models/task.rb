@@ -9,6 +9,8 @@ class Task < ApplicationRecord
 
   # scope
   scope :sort_by_created_at, -> { order('created_at DESC') }
+  scope :sort_by_column, ->(order_by, direction) { order("#{order_by} #{direction}") }
+
   private
 
   def end_at_after_start_at?
