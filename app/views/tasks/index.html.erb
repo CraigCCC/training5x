@@ -1,5 +1,10 @@
 <h1><%= t("tasks.page_title.list") %></h1>
-
+<div>
+  <%= form_with url: tasks_path, method: :get, local: true do |f| %>
+    <%= f.text_field :search %>
+    <%= f.submit t('tasks.links.search')%>
+  <% end %>
+</div>
 <%= link_to t("tasks.links.add_task"), new_task_path%>
 
 <table>

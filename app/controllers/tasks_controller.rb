@@ -2,9 +2,15 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    return @tasks = Task.sort_by_column(params[:order_by], params[:direction]) if params[:order_by]
-
-    @tasks = Task.sort_by_created_at
+    if params[:search].present?
+      session[:search] = params[:search]
+      @tasks = Task.search_like(params[:search])
+    elsif params[:order_by].present?
+      @tasks = Task.search_like(session[:search]).sort_by_column(params[:order_by], params[:direction])
+    else
+      session.delete(:search)
+      @tasks = Task.sort_by_created_at
+    end
   end
 
   def show
@@ -50,6 +56,7 @@ class TasksController < ApplicationController
                                  :status,
                                  :priority,
                                  :start_at,
-                                 :end_at)
+                                 :end_at,
+                                 :search)
   end
 end

@@ -57,6 +57,7 @@ zh-TW:
       edit: "編輯"
       show: "查看"
       delete: "刪除"
+      search: "搜尋"
     confirms:
       delete: "確定刪除？"
     notices:
