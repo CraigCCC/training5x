@@ -2,6 +2,7 @@
 <div>
   <%= form_with url: tasks_path, method: :get, local: true do |f| %>
     <%= f.text_field :search %>
+    <%= f.select :seatch_status, options_for_select(Task::SEARCH_STATUS_CLASS), { include_blank: t("tasks.status.title") } %>
     <%= f.submit t('tasks.links.search')%>
   <% end %>
 </div>

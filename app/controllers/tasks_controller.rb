@@ -2,11 +2,12 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:search].present?
-      session[:search] = params[:search]
-      @tasks = Task.search_like(params[:search])
+    if params[:search] || params[:search_status]
+      session[:search] = [params[:search], params[:search_status]]
+      @tasks = Task.search_like(params[:search]).search_status(params[:search_status])
     elsif params[:order_by].present?
-      @tasks = Task.search_like(session[:search]).sort_by_column(params[:order_by], params[:direction])
+      session[:search] ||= []
+      @tasks = Task.search_like(session[:search][0]).search_status(session[:search][1]).sort_by_column(params[:order_by], params[:direction])
     else
       session.delete(:search)
       @tasks = Task.sort_by_created_at

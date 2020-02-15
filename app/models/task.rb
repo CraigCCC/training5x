@@ -10,7 +10,11 @@ class Task < ApplicationRecord
   # scope
   scope :sort_by_created_at, -> { order('created_at DESC') }
   scope :sort_by_column, ->(order_by, direction) { order("#{order_by} #{direction}") }
-  scope :search_like, ->(search) { search.present? ? where('title LIKE ?', "%#{search}%") : all }
+  scope :search_like, ->(search) { search.present? ? where('title ILIKE ?', "%#{search}%") : all }
+  scope :search_status, ->(search_status) { search_status.present? ? where('status = ?', search_status) : all }
+
+  # Constant
+  SEARCH_STATUS_CLASS = [[I18n.t('tasks.status.pending'), 0], [I18n.t('tasks.status.processing'), 1], [I18n.t('tasks.status.done'), 2]].freeze
 
   private
 
