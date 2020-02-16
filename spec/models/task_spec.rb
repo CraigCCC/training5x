@@ -37,11 +37,9 @@ RSpec.describe Task, type: :model do
 
   describe 'Search Tasks' do
     it 'When search by title' do
-      first_task = FactoryBot.create(:task, :title)
-      second_task = FactoryBot.create(:task, :title)
-      third_task = FactoryBot.create(:task, :title)
+      target_task = FactoryBot.create(:task, :title)
 
-      search_by_title_and_status(third_task, 'Hello World', '', '')
+      search_by_title_and_status(target_task, 'Hello World', '', '')
     end
 
     it 'When search by status' do
@@ -66,6 +64,9 @@ RSpec.describe Task, type: :model do
     params = { search: title, search_status: enum }
     @tasks = Task.search_like(params[:search]).search_status(params[:search_status]).sort_by_created_at
     expect(@tasks.first).to eq(target_task)
-      @tasks.each { |task| expect(task.status).to eq(status) } if status.present?
+    @tasks.each do |task|
+      expect(task.title).to eq(title) if params[:search].present?
+      expect(task.status).to eq(status) if params[:search_status].present?
+    end
   end
 end

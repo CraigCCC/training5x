@@ -85,6 +85,33 @@ RSpec.feature 'Tasks', type: :feature do
     end
   end
 
+  describe 'Search feature', js: true do
+    scenario 'when search by title' do
+      FactoryBot.create(:task)
+      FactoryBot.create(:task, :title)
+
+      visit root_path
+      search_by_title_and_status('Hello World', '')
+    end
+
+    scenario 'when search by status' do
+      FactoryBot.create(:task, :processing)
+      FactoryBot.create(:task, :done)
+
+      visit root_path
+      search_by_title_and_status('', '待處理')
+      search_by_title_and_status('', '進行中')
+      search_by_title_and_status('', '已完成')
+    end
+
+    scenario 'when search by title and status' do
+      visit root_path
+      search_by_title_and_status('Hello World', '待處理')
+    end
+  end
+
+  private
+
   def expect_task_info_equal(task)
     expect(task.title).to eq 'Coding'
     expect(task.content).to eq 'This is RSpec test'
@@ -92,5 +119,19 @@ RSpec.feature 'Tasks', type: :feature do
     expect(task.end_at).to eq 'Thu, 30 Jan 2020 23:15:17 +0800'
     expect(task.status).to eq 'pending'
     expect(task.priority).to eq 'high'
+  end
+
+  def search_by_title_and_status(title, status)
+    within('form') do
+      fill_in 'search', with: title
+      select status, from: 'search_status' if status.present?
+    end
+    click_button '搜尋'
+    page.all('.task_title').each do |target|
+      expect(target).to have_content(title)
+    end
+    page.all('.task_status').each do |target|
+      expect(target).to have_content(status)
+    end
   end
 end
