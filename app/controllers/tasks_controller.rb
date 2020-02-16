@@ -4,10 +4,10 @@ class TasksController < ApplicationController
   def index
     if params[:search] || params[:search_status]
       session[:search] = [params[:search], params[:search_status]]
-      @tasks = Task.search_like(params[:search]).search_status(params[:search_status])
+      @tasks = Task.search_like(params[:search]).search_status(params[:search_status]).sort_by_created_at
     elsif params[:order_by].present?
       session[:search] ||= []
-      @tasks = Task.search_like(session[:search][0]).search_status(session[:search][1]).sort_by_column(params[:order_by], params[:direction])
+      @tasks = Task.search_like(session[:search][0]).search_status(session[:search][1]).sort_by_column(params[:order_by], params[:direction]).sort_by_created_at
     else
       session.delete(:search)
       @tasks = Task.sort_by_created_at
