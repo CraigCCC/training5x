@@ -86,17 +86,22 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   describe 'Search feature', js: true do
+    let(:task) { create(:task) }
+    let(:task_title) { create(:task, :title) }
+    let(:task_processing) { create(:task, :processing) }
+    let(:task_done) { create(:task, :done) }
+
     scenario 'when search by title' do
-      FactoryBot.create(:task)
-      FactoryBot.create(:task, :title)
+      task
+      task_title
 
       visit root_path
       search_by_title_and_status('Hello World', '')
     end
 
     scenario 'when search by status' do
-      FactoryBot.create(:task, :processing)
-      FactoryBot.create(:task, :done)
+      task_processing
+      task_done
 
       visit root_path
       search_by_title_and_status('', '待處理')
@@ -127,11 +132,11 @@ RSpec.feature 'Tasks', type: :feature do
       select status, from: 'search_status' if status.present?
     end
     click_button '搜尋'
-    page.all('.task_title').each do |target|
-      expect(target).to have_content(title)
+    page.all('.task_title').each do |task|
+      expect(task).to have_content(title)
     end
-    page.all('.task_status').each do |target|
-      expect(target).to have_content(status)
+    page.all('.task_status').each do |task|
+      expect(task).to have_content(status)
     end
   end
 end

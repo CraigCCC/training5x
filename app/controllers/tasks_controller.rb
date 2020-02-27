@@ -2,16 +2,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:search] || params[:search_status]
-      session[:search] = [params[:search], params[:search_status]]
-      @tasks = Task.search_like(params[:search]).search_status(params[:search_status]).sort_by_created_at
-    elsif params[:order_by].present?
-      session[:search] ||= []
-      @tasks = Task.search_like(session[:search][0]).search_status(session[:search][1]).sort_by_column(params[:order_by], params[:direction]).sort_by_created_at
-    else
-      session.delete(:search)
-      @tasks = Task.sort_by_created_at
-    end
+    index_sort_or_search(params)
   end
 
   def show
@@ -59,5 +50,18 @@ class TasksController < ApplicationController
                                  :start_at,
                                  :end_at,
                                  :search)
+  end
+
+  def index_sort_or_search(params)
+    if params[:search] || params[:serach_status]
+      session[:search] = [params[:search], params[:search_status]]
+      @tasks = Task.search_title(params[:search]).search_status(params[:search_status]).sort_by_created_at
+    elsif params[:order_by].present?
+      session[:search] ||= []
+      @tasks = Task.search_title(session[:search][0]).search_status(session[:search][1]).sort_by_column(params[:order_by], params[:direction]).sort_by_created_at
+    else
+      session.delete(:search)
+      @tasks = Task.sort_by_created_at
+    end
   end
 end

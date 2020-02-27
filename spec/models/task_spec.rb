@@ -39,7 +39,7 @@ RSpec.describe Task, type: :model do
     it 'When search by title' do
       target_task = FactoryBot.create(:task, :title)
 
-      search_by_title_and_status(target_task, 'Hello World', '', '')
+      search_by_title_and_status(target_task, 'Hello World')
     end
 
     it 'When search by status' do
@@ -47,9 +47,9 @@ RSpec.describe Task, type: :model do
       processing_task = FactoryBot.create(:task, :processing)
       done_task = FactoryBot.create(:task, :done)
 
-      search_by_title_and_status(pending_task, '', 'pending', '0')
-      search_by_title_and_status(processing_task, '', 'processing', '1')
-      search_by_title_and_status(done_task, '', 'done', '2')
+      search_by_title_and_status(pending_task, nil, 'pending', '0')
+      search_by_title_and_status(processing_task, nil, 'processing', '1')
+      search_by_title_and_status(done_task, nil, 'done', '2')
     end
 
     it 'When search by title and status' do
@@ -60,13 +60,13 @@ RSpec.describe Task, type: :model do
 
   private
 
-  def search_by_title_and_status(target_task, title, status, enum)
+  def search_by_title_and_status(task, title = nil, status = nil, enum = nil)
     params = { search: title, search_status: enum }
-    @tasks = Task.search_like(params[:search]).search_status(params[:search_status]).sort_by_created_at
-    expect(@tasks.first).to eq(target_task)
-    @tasks.each do |task|
-      expect(task.title).to eq(title) if params[:search].present?
-      expect(task.status).to eq(status) if params[:search_status].present?
+    @tasks = Task.search_title(params[:search]).search_status(params[:search_status]).sort_by_created_at
+    expect(@tasks.first).to eq(task)
+    @tasks.each do |t|
+      expect(t.title).to eq(title) if params[:search].present?
+      expect(t.status).to eq(status) if params[:search_status].present?
     end
   end
 end
