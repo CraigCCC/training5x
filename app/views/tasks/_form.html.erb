@@ -4,10 +4,10 @@
   <% end %>
 <% end %>
 
-<%= form_with model: @task, local: true do |f| %>
-  <div>
+<%= form_with model: @task, local: true, class: 'form-row' do |f| %>
+  <div class="form-group col-md-12">
     <%= f.label :title, t("tasks.page_title.task") %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control' %>
   </div>
 
   <%# TODO: 標籤 %>
@@ -16,43 +16,60 @@
   <%# TODO: 標籤 %>
 
   <%# TODO: Datepicker %>
-  <div>
+  <div class="form-group col-md-6">
     <%= f.label :start_at, t("tasks.start_at") %>
-    <%= f.text_field :start_at %>
+    <%= f.text_field :start_at, class: 'form-control' %>
   </div>
 
-  <div>
+  <div class="form-group col-md-6">
     <%= f.label :end_at, t("tasks.end_at") %>
-    <%= f.text_field :end_at %>
+    <%= f.text_field :end_at, class: 'form-control' %>
   </div>
 <%# TODO: Datepicker %>
 
-  <div>
-    <%= f.label :priority, t("tasks.priority.title") %>
-    <%= f.radio_button :priority, "high", checked: true %>
-    <%= f.label :priority, t("tasks.priority.high") %>
-    <%= f.radio_button :priority, "normal" %>
-    <%= f.label :priority, t("tasks.priority.normal") %>
-    <%= f.radio_button :priority, "low" %>
-    <%= f.label :priority, t("tasks.priority.low") %>
+  <div class="form-group col-md-6">
+    <div>
+      <%= f.label :priority, t("tasks.priority.title") %>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :priority, "high", checked: true, class: 'form-check-input' %>
+      <%= f.label :priority, t("tasks.priority.high"), class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :priority, "normal", class: 'form-check-input' %>
+      <%= f.label :priority, t("tasks.priority.normal"), class: 'form-check-label' %>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :priority, "low", class: 'form-check-input' %>
+      <%= f.label :priority, t("tasks.priority.low"), class: 'form-check-label' %>
+    </div>
   </div>
 
-  <div>
-    <%= f.select(:status,
-                 options_for_select([
-                   [t("tasks.status.pending"), "pending"],
-                   [t("tasks.status.processing"), "processing"],
-                   [t("tasks.status.done"), "done"]
-                 ])) %>
+  <div class="form-group col-md-6">
+    <div>
+      <%= f.label :status, t("tasks.status.title") %>
+    </div>
+    <div>
+      <%= f.select(:status,
+                   options_for_select([
+                     [t("tasks.status.pending"), "pending"],
+                     [t("tasks.status.processing"), "processing"],
+                     [t("tasks.status.done"), "done"]]),
+                   {},
+                   class: 'form-control') %>
+    </div>
   </div>
 
-  <div>
+  <div class="form-group col-md-12">
     <%= f.label :content, t("tasks.content") %>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, class: 'form-control', rows: '7' %>
   </div>
 
-  <div>
-    <%= f.submit t("tasks.links.submit")%>
-    <%= link_to t("tasks.links.cancel"), tasks_path %>
+  <div class="form-group col-md-12">
+    <%= f.submit t("tasks.links.submit"), class: 'btn btn-outline-primary'%>
+    <%= link_to t("tasks.links.cancel"), tasks_path, class: 'btn btn-outline-secondary' %>
   </div>
 <% end %>
