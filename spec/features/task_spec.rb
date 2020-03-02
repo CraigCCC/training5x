@@ -86,32 +86,43 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   describe 'Search feature', js: true do
-    let(:task) { create(:task) }
-    let(:task_title) { create(:task, :title) }
-    let(:task_processing) { create(:task, :processing) }
-    let(:task_done) { create(:task, :done) }
+    describe 'When search by title' do
+      let(:task) { create(:task) }
+      let(:task_title) { create(:task, :title) }
 
-    scenario 'when search by title' do
-      task
-      task_title
+      before do
+        task
+        task_title
+      end
 
-      visit root_path
-      search_by_title_and_status('Hello World', '')
+      scenario do
+        visit root_path
+        except_search_result_with('Hello World')
+      end
     end
 
-    scenario 'when search by status' do
-      task_processing
-      task_done
+    describe 'When search by status' do
+      let(:task_processing) { create(:task, :processing) }
+      let(:task_done) { create(:task, :done) }
 
-      visit root_path
-      search_by_title_and_status('', '待處理')
-      search_by_title_and_status('', '進行中')
-      search_by_title_and_status('', '已完成')
+      before do
+        task_processing
+        task_done
+      end
+
+      scenario do
+        visit root_path
+        except_search_result_with(nil, '待處理')
+        except_search_result_with(nil, '進行中')
+        except_search_result_with(nil, '已完成')
+      end
     end
 
-    scenario 'when search by title and status' do
-      visit root_path
-      search_by_title_and_status('Hello World', '待處理')
+    describe 'When search by title and status' do
+      scenario do
+        visit root_path
+        except_search_result_with('Hello World', '待處理')
+      end
     end
   end
 
@@ -126,7 +137,7 @@ RSpec.feature 'Tasks', type: :feature do
     expect(task.priority).to eq 'high'
   end
 
-  def search_by_title_and_status(title, status)
+  def except_search_result_with(title = nil, status = nil)
     within('form') do
       fill_in 'search', with: title
       select status, from: 'search_status' if status.present?
