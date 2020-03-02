@@ -51,8 +51,8 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   describe 'Sort task flow', js: true do
-    let(:first_task) { create(:task, created_at: '2020-01-31 11:00') }
-    let(:second_task) { create(:task, created_at: '2020-02-01 11:00', end_at: first_task.end_at + 1.days) }
+    let(:first_task) { create(:task, created_at: '2020-01-31 11:00', priority: 'high') }
+    let(:second_task) { create(:task, created_at: '2020-02-01 11:00', end_at: first_task.end_at + 1.days, priority: 'low') }
 
     scenario 'Default sort by created_at' do
       first_task
@@ -68,20 +68,12 @@ RSpec.feature 'Tasks', type: :feature do
 
     scenario 'When sort by end_at' do
       visit root_path
-      click_link '結束時間'
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content(Task.second.title)
-      end
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content(Task.first.title)
-      end
-      click_link '結束時間'
-      within 'tbody tr:nth-child(1)' do
-        expect(page).to have_content(Task.first.title)
-      end
-      within 'tbody tr:nth-child(2)' do
-        expect(page).to have_content(Task.second.title)
-      end
+      expect_sort_by_column('結束時間')
+    end
+
+    scenario 'When sort by priority' do
+      visit root_path
+      expect_sort_by_column('優先順序')
     end
   end
 
@@ -135,6 +127,23 @@ RSpec.feature 'Tasks', type: :feature do
     expect(task.end_at).to eq 'Thu, 30 Jan 2020 23:15:17 +0800'
     expect(task.status).to eq 'pending'
     expect(task.priority).to eq 'high'
+  end
+
+  def expect_sort_by_column(button)
+    click_link button
+    within 'tbody tr:nth-child(1)' do
+      expect(page).to have_content(Task.second.title)
+    end
+    within 'tbody tr:nth-child(2)' do
+      expect(page).to have_content(Task.first.title)
+    end
+    click_link button
+    within 'tbody tr:nth-child(1)' do
+      expect(page).to have_content(Task.first.title)
+    end
+    within 'tbody tr:nth-child(2)' do
+      expect(page).to have_content(Task.second.title)
+    end
   end
 
   def except_search_result_with(title = nil, status = nil)

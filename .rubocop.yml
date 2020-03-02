@@ -9,6 +9,9 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
 
+Metrics/MethodLength:
+  Max: 20
+
 Style/StringLiterals:
   Exclude:
     - 'spec/*_helper.rb'
