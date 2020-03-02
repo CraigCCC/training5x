@@ -26,6 +26,7 @@ en:
       invaild_date: "Should't faster than Start Time"
 
   locale:
+    language: "Language"
     zhTW: "Chinese(Traditional)"
     en: "English"
   tasks:
@@ -65,3 +66,29 @@ en:
       delete_success: "Delete Successfully"
     tags:
       title: "Tag"
+
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "Displaying <b>1</b> %{entry_name}"
+          other: "Displaying <b>all %{count}</b> %{entry_name}"
+      more_pages:
+        display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+
+  time:
+    am: A.M
+    formats:
+      default: "%Y%m%d %A %H:%M:%S %Z"
+      long: "%Y%m%d %H:%M"
+      short: "%m%d %H:%M"
+      custom_date: "%m/%d (%a) %H:%M"
+    pm: P.M

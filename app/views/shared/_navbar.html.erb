@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%= link_to '5xTraining', root_path,class: 'navbar-brand'%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t("locale.language")%>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">  
+          <%= link_to t("locale.en"), { locale: "en" }, class: 'dropdown-item' %>
+          <%= link_to t("locale.zhTW"), { locale: "zh-TW" }, class: 'dropdown-item' %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
