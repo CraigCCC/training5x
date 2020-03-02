@@ -1,5 +1,11 @@
 <h1><%= t("tasks.page_title.list") %></h1>
-
+<div>
+  <%= form_with url: tasks_path, method: :get, local: true, id: 'search_form' do |f| %>
+    <%= f.text_field :search %>
+    <%= f.select :search_status, status_options, { include_blank: t("tasks.status.title") } %>
+    <%= f.submit t('tasks.links.search')%>
+  <% end %>
+</div>
 <%= link_to t("tasks.links.add_task"), new_task_path%>
 
 <table>
@@ -16,8 +22,8 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td  scope="col"><%= task.title %></td>
-        <td><%= t("tasks.status.#{task.status}") %></td>
+        <td scope="col" class="task_title"><%= task.title %></td>
+        <td class="task_status"><%= t("tasks.status.#{task.status}") %></td>
         <td><%= t("tasks.priority.#{task.priority}") %></td>
         <td><%= task.start_at %></td>
         <td><%= task.end_at %></td>

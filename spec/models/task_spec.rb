@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   let(:new_task) { create(:task) }
+  it { should define_enum_for(:status).with_values([:pending, :processing, :done]) }
   before { new_task }
 
   describe 'Validations' do
@@ -31,6 +32,41 @@ RSpec.describe Task, type: :model do
       expect(new_task.errors.messages[:title]).to include('不可為空白')
       expect(new_task.errors.messages[:start_at]).to include('不可為空白')
       expect(new_task.errors.messages[:end_at]).to include('不可為空白')
+    end
+  end
+
+  describe 'Search Tasks' do
+    it 'When search by title' do
+      target_task = FactoryBot.create(:task, :title)
+
+      search_by_title_and_status(target_task, 'Hello World')
+    end
+
+    it 'When search by status' do
+      pending_task = FactoryBot.create(:task)
+      processing_task = FactoryBot.create(:task, :processing)
+      done_task = FactoryBot.create(:task, :done)
+
+      search_by_title_and_status(pending_task, nil, 'pending', '0')
+      search_by_title_and_status(processing_task, nil, 'processing', '1')
+      search_by_title_and_status(done_task, nil, 'done', '2')
+    end
+
+    it 'When search by title and status' do
+      target_task = FactoryBot.create(:task, :title, :done)
+      search_by_title_and_status(target_task, 'Hello World', 'done', '2')
+    end
+  end
+
+  private
+
+  def search_by_title_and_status(task, title = nil, status = nil, enum = nil)
+    params = { search: title, search_status: enum }
+    @tasks = Task.search_title(params[:search]).search_status(params[:search_status]).sort_by_created_at
+    expect(@tasks.first).to eq(task)
+    @tasks.each do |t|
+      expect(t.title).to eq(title) if params[:search].present?
+      expect(t.status).to eq(status) if params[:search_status].present?
     end
   end
 end

@@ -85,6 +85,49 @@ RSpec.feature 'Tasks', type: :feature do
     end
   end
 
+  describe 'Search feature', js: true do
+    describe 'When search by title' do
+      let(:task) { create(:task) }
+      let(:task_title) { create(:task, :title) }
+
+      before do
+        task
+        task_title
+      end
+
+      scenario do
+        visit root_path
+        except_search_result_with('Hello World')
+      end
+    end
+
+    describe 'When search by status' do
+      let(:task_processing) { create(:task, :processing) }
+      let(:task_done) { create(:task, :done) }
+
+      before do
+        task_processing
+        task_done
+      end
+
+      scenario do
+        visit root_path
+        except_search_result_with(nil, '待處理')
+        except_search_result_with(nil, '進行中')
+        except_search_result_with(nil, '已完成')
+      end
+    end
+
+    describe 'When search by title and status' do
+      scenario do
+        visit root_path
+        except_search_result_with('Hello World', '待處理')
+      end
+    end
+  end
+
+  private
+
   def expect_task_info_equal(task)
     expect(task.title).to eq 'Coding'
     expect(task.content).to eq 'This is RSpec test'
@@ -92,5 +135,19 @@ RSpec.feature 'Tasks', type: :feature do
     expect(task.end_at).to eq 'Thu, 30 Jan 2020 23:15:17 +0800'
     expect(task.status).to eq 'pending'
     expect(task.priority).to eq 'high'
+  end
+
+  def except_search_result_with(title = nil, status = nil)
+    within('form') do
+      fill_in 'search', with: title
+      select status, from: 'search_status' if status.present?
+    end
+    click_button '搜尋'
+    page.all('.task_title').each do |task|
+      expect(task).to have_content(title)
+    end
+    page.all('.task_status').each do |task|
+      expect(task).to have_content(status)
+    end
   end
 end
