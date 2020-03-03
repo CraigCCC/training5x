@@ -130,19 +130,21 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   def expect_sort_by_column(button)
+    tasks = { first: Task.first, second: Task.second }
+
     click_link button
     within 'tbody tr:nth-child(1)' do
-      expect(page).to have_content(Task.second.title)
+      expect(page).to have_content(tasks[:second].title)
     end
     within 'tbody tr:nth-child(2)' do
-      expect(page).to have_content(Task.first.title)
+      expect(page).to have_content(tasks[:first].title)
     end
     click_link button
     within 'tbody tr:nth-child(1)' do
-      expect(page).to have_content(Task.first.title)
+      expect(page).to have_content(tasks[:first].title)
     end
     within 'tbody tr:nth-child(2)' do
-      expect(page).to have_content(Task.second.title)
+      expect(page).to have_content(tasks[:second].title)
     end
   end
 
