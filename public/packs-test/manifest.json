@@ -1,13 +1,23 @@
 {
-  "application.js": "/packs-test/js/application-553a6d69ef4b54f3ee83.js",
-  "application.js.map": "/packs-test/js/application-553a6d69ef4b54f3ee83.js.map",
+  "application.js": "/packs-test/js/application-c5cb10fca9324d799ea1.js",
+  "application.js.map": "/packs-test/js/application-c5cb10fca9324d799ea1.js.map",
+  "datepickr.js": "/packs-test/js/datepickr-0c910e48075b525354ee.js",
+  "datepickr.js.map": "/packs-test/js/datepickr-0c910e48075b525354ee.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs-test/js/application-553a6d69ef4b54f3ee83.js"
+        "/packs-test/js/application-c5cb10fca9324d799ea1.js"
       ],
       "js.map": [
-        "/packs-test/js/application-553a6d69ef4b54f3ee83.js.map"
+        "/packs-test/js/application-c5cb10fca9324d799ea1.js.map"
+      ]
+    },
+    "datepickr": {
+      "js": [
+        "/packs-test/js/datepickr-0c910e48075b525354ee.js"
+      ],
+      "js.map": [
+        "/packs-test/js/datepickr-0c910e48075b525354ee.js.map"
       ]
     }
   }

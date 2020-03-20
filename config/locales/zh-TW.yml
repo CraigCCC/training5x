@@ -26,6 +26,7 @@ zh-TW:
       invaild_date: "不可早於開始日期"
 
   locale:
+    language: "語系"
     zhTW: "中文版(繁體)"
     en: "英文版"
 
@@ -66,3 +67,30 @@ zh-TW:
       delete_success: "刪除成功"
     tags:
       title: "標籤"
+
+  views:
+    pagination:
+      first: "&laquo; 第一頁"
+      last: "最後一頁 &raquo;"
+      previous: "&lsaquo; 上一頁"
+      next: "下一頁 &rsaquo;"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "找不到 %{entry_name}"
+          one: "只有 <b>1</b> 筆 %{entry_name}"
+          other: "顯示 <b>所有 %{count}</b> 筆 %{entry_name}"
+      more_pages:
+        display_entries: "顯示 <b>%{first}&nbsp;-&nbsp;%{last}</b> 筆 %{entry_name}，共 <b>%{total}</b> 筆"
+
+  time:
+    am: 上午
+    formats:
+      default: "%Y年%m月%d日 %A %H:%M:%S %Z"
+      long: "%Y年%m月%d日 %H:%M"
+      short: "%m月%d日 %H:%M"
+      custom_date: "%m/%d (%a) %H:%M"
+    pm: 下午
+
