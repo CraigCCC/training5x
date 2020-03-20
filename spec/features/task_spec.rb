@@ -130,7 +130,6 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   def expect_sort_by_column(button)
-<<<<<<< HEAD
     tasks = { first: Task.first, second: Task.second }
 
     click_link button
@@ -150,25 +149,6 @@ RSpec.feature 'Tasks', type: :feature do
   end
 
   def except_search_result_with(title = nil, status = nil)
-=======
-    click_link button
-    within 'tbody tr:nth-child(1)' do
-      expect(page).to have_content(Task.second.title)
-    end
-    within 'tbody tr:nth-child(2)' do
-      expect(page).to have_content(Task.first.title)
-    end
-    click_link button
-    within 'tbody tr:nth-child(1)' do
-      expect(page).to have_content(Task.first.title)
-    end
-    within 'tbody tr:nth-child(2)' do
-      expect(page).to have_content(Task.second.title)
-    end
-  end
-
-  def search_by_title_and_status(title, status)
->>>>>>> Feature order by priority in the index page
     within('form') do
       fill_in 'search', with: title
       select status, from: 'search_status' if status.present?
